@@ -1,0 +1,2 @@
+# libgs
+GameServer Library
