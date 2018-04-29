@@ -134,7 +134,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\grpc\.build\Release;C:\grpc\.build\third_party\protobuf\Release;C:\grpc\.build\third_party\boringssl\ssl\Release;C:\grpc\.build\third_party\boringssl\crypto\Release;C:\boost_1_58_0\stage\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\grpc\.build\Release;C:\grpc\.build\third_party\protobuf\Release;C:\grpc\.build\third_party\boringssl\ssl\Release;C:\grpc\.build\third_party\boringssl\crypto\Release;C:\grpc\.build\third_party\zlib\Release;C:\boost_1_58_0\stage\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +155,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\grpc\.build\Release;C:\grpc\.build\third_party\protobuf\Release;C:\grpc\.build\third_party\boringssl\ssl\Release;C:\grpc\.build\third_party\boringssl\crypto\Release;C:\boost_1_58_0\stage\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\grpc\.build\Release;C:\grpc\.build\third_party\protobuf\Release;C:\grpc\.build\third_party\boringssl\ssl\Release;C:\grpc\.build\third_party\boringssl\crypto\Release;C:\grpc\.build\third_party\zlib\Release;C:\boost_1_58_0\stage\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
