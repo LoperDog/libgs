@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "RedisConnection.h"
+#include "RedisParameter.h"
 
 namespace libgs {
 namespace Redis {
 
-RedisConnection::RedisConnection(const std::string& _address, const unsigned short _port) :
-  address(boost::asio::ip::address::from_string(_address)),
-  port(_port),
+RedisConnection::RedisConnection(const RedisEndPoint& _endpoint) :
+  endpoint(std::make_shared<RedisEndPoint>(_endpoint)),
   redis(ioService)
 {
 }
@@ -17,7 +17,7 @@ RedisConnection::~RedisConnection()
 
 bool RedisConnection::Connect()
 {
-  redis.connect(address, port, [this](bool isSuccess, std::string errcode) {
+  redis.connect(endpoint->address, endpoint->port, [this](bool isSuccess, std::string errcode) {
     if (!isSuccess)
     {
       return false;

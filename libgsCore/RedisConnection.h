@@ -6,17 +6,17 @@
 namespace libgs {
 namespace Redis {
 
+struct RedisEndPoint;
+
 class RedisConnection
 {
 public:
-  RedisConnection(const std::string& _address, const unsigned short _port);
+  RedisConnection(const RedisEndPoint& _endpoint);
   ~RedisConnection();
 
   bool Connect();
 private:
-  boost::asio::ip::address address;
-  const unsigned short port;
-
+  std::shared_ptr<RedisEndPoint> endpoint;
   boost::asio::io_service ioService;
   redisclient::RedisAsyncClient redis;
 };
