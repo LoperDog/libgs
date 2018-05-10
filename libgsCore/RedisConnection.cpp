@@ -5,10 +5,18 @@
 namespace libgs {
 namespace Redis {
 
-RedisConnection::RedisConnection(const RedisEndPoint& _endpoint) :
-  endpoint(std::make_shared<RedisEndPoint>(_endpoint)),
-  redis(ioService)
+struct RedisConnectImpl
 {
+  std::shared_ptr<RedisEndPoint> endpoint;
+  boost::asio::io_service ioService;
+  redisclient::RedisAsyncClient redis;
+  RedisConnectImpl() : redis(ioService) {}
+};
+
+RedisConnection::RedisConnection(const RedisEndPoint& _endpoint) :
+  _pimpl(std::make_shared<RedisConnectImpl>())  
+{
+  _pimpl->endpoint = std::make_shared<RedisEndPoint>(_endpoint);
 }
 
 RedisConnection::~RedisConnection()
@@ -17,14 +25,12 @@ RedisConnection::~RedisConnection()
 
 bool RedisConnection::Connect()
 {
-  redis.connect(endpoint->address, endpoint->port, [this](bool isSuccess, std::string errcode) {
-    if (!isSuccess)
-    {
-      return false;
-    }
+  bool isSuccess = false;
+  _pimpl->redis.connect(_pimpl->endpoint->address, _pimpl->endpoint->port, [this, &isSuccess](bool _isSuccess, std::string errcode) {
+    isSuccess = _isSuccess;
   });
 
-  return true;
+  return isSuccess;
 }
 
 }

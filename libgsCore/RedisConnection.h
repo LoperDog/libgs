@@ -7,6 +7,7 @@ namespace libgs {
 namespace Redis {
 
 struct RedisEndPoint;
+struct RedisConnectImpl;
 
 class RedisConnection
 {
@@ -16,9 +17,7 @@ public:
 
   bool Connect();
 private:
-  std::shared_ptr<RedisEndPoint> endpoint;
-  boost::asio::io_service ioService;
-  redisclient::RedisAsyncClient redis;
+  std::shared_ptr<RedisConnectImpl> _pimpl;
 };
 
 }
