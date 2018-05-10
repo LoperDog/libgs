@@ -3,7 +3,7 @@
 #include <boost/asio/ip/address.hpp>
 #include <redisclient/redisasyncclient.h>
 
-namespace Taylor {
+namespace libgs {
 namespace Redis {
 
 class RedisConnection

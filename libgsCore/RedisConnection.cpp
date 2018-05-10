@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RedisConnection.h"
 
-namespace Taylor {
+namespace libgs {
 namespace Redis {
 
 RedisConnection::RedisConnection(const std::string& _address, const unsigned short _port) :
