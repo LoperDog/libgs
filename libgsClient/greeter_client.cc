@@ -16,18 +16,6 @@
  *
  */
 #include "stdafx.h"
-#pragma comment(lib, "gpr.lib")
-#pragma comment(lib, "grpc++.lib")
-#pragma comment(lib, "grpc.lib")
-#pragma comment(lib, "ssl.lib")
-#pragma comment(lib, "crypto.lib")
-#ifdef _DEBUG
-#pragma comment(lib, "libprotobufd.lib")
-#pragma comment(lib, "zlibstaticd.lib")
-#elif NDEBUG
-#pragma comment(lib, "libprotobuf.lib")
-#pragma comment(lib, "zlibstatic.lib")
-#endif
 #include <iostream>
 #include <memory>
 #include <string>

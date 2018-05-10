@@ -116,6 +116,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\grpc\.build\Debug;C:\grpc\.build\third_party\protobuf\Debug;C:\grpc\.build\third_party\boringssl\ssl\Debug;C:\grpc\.build\third_party\boringssl\crypto\Debug;C:\grpc\.build\third_party\zlib\Debug;C:\boost_1_58_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gpr.lib;grpc++.lib;grpc.lib;ssl.lib;crypto.lib;libprotobufd.lib;zlibstaticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -158,6 +159,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\grpc\.build\Release;C:\grpc\.build\third_party\protobuf\Release;C:\grpc\.build\third_party\boringssl\ssl\Release;C:\grpc\.build\third_party\boringssl\crypto\Release;C:\grpc\.build\third_party\zlib\Release;C:\boost_1_58_0\stage\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gpr.lib;grpc++.lib;grpc.lib;ssl.lib;crypto.lib;libprotobuf.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
