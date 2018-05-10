@@ -4,13 +4,6 @@
 namespace Taylor {
 namespace Redis {
 
-RedisConnection::RedisConnection() :
-  address(boost::asio::ip::address::from_string("127.0.0.1")),
-  port(6379),
-  redis(ioService)
-{
-}
-
 RedisConnection::RedisConnection(const std::string& _address, const unsigned short _port) :
   address(boost::asio::ip::address::from_string(_address)),
   port(_port),

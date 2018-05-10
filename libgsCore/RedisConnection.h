@@ -14,7 +14,6 @@ class RedisConnection
   boost::asio::io_service ioService;
   redisclient::RedisAsyncClient redis;
  public:
-  RedisConnection();
   RedisConnection(const std::string& _address, const unsigned short _port);
   ~RedisConnection();
 
