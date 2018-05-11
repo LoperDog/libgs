@@ -18,32 +18,42 @@ cmake_minimum_required(VERSION 3.0.2)
 
 project(libgs C CXX)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-find_package(Boost COMPONENTS system unit_test_framework REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system filesystem unit_test_framework)
+find_package(spdlog CONFIG REQUIRED)
+
+include_directories(spdlog)
 
 set(HEADER
   ${CMAKE_SOURCE_DIR}/core/include/libgs/common/uuid.h
+  ${CMAKE_SOURCE_DIR}/core/include/libgs/common/logging.h
 )
 
 set(CC
   ${CMAKE_SOURCE_DIR}/core/src/common/uuid.cc
+  ${CMAKE_SOURCE_DIR}/core/src/common/logging.cc
 )
 
 set(SOURCES ${HEADER} ${CC})
 
-add_executable(libgs ${HEADER}
-${CMAKE_SOURCE_DIR}/src/main.cc
-${SOURCES})
+include_directories(${HEADER})
 
-add_executable(libgs_test ${HEADER}
-${SOURCES}
-${CMAKE_SOURCE_DIR}/unit_test/common/uuid_test.cc)
+
+###########################################################################
+# CORE
+###########################################################################
+
+add_executable(libgs
+  ${HEADER}
+  ${SOURCES}
+  ${CMAKE_SOURCE_DIR}/core/src/main.cc)
 
 target_link_libraries(libgs PUBLIC
   ${Boost_LIBRARIES}
+  ${spdlog}
   pthread
 )
 
@@ -52,10 +62,13 @@ target_link_libraries(libgs PUBLIC
 # CORE-TEST
 ###########################################################################
 
-SET(TEST_CASES uuid_test)
+SET(TEST_CASES
+  uuid_test
+  logging_test)
 
 SET(TEST_CASE_IMPLEMENTATION
-  common/uuid_test)
+  common/uuid_test
+  common/logging_test)
 
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tests)
@@ -67,8 +80,22 @@ add_executable(uuid_test
   ${SOURCES}
   ${CMAKE_SOURCE_DIR}/core-test/common/uuid_test.cc)
 
+add_executable(logging_test
+  ${HEADER}
+  ${SOURCES}
+  ${CMAKE_SOURCE_DIR}/core-test/common/logging_test.cc)
+
+
 target_link_libraries(uuid_test PUBLIC
   ${Boost_LIBRARIES}
   ${Boost_UNIT_TEST_FRAMEWORK}
+  ${spdlog}
+  pthread
+)
+
+target_link_libraries(logging_test PUBLIC
+  ${Boost_LIBRARIES}
+  ${Boost_UNIT_TEST_FRAMEWORK}
+  ${spdlog}
   pthread
 )
