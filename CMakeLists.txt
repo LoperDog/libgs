@@ -41,6 +41,9 @@ set(SOURCES ${HEADER} ${CC})
 
 include_directories(${HEADER})
 
+# TODO(inkeun): 추후에 third-party library 빌드용
+#               cmake 를 별도로 만든다.
+include_directories(${CMAKE_SOURCE_DIR}/third-party)
 
 ###########################################################################
 # CORE
@@ -91,6 +94,7 @@ target_link_libraries(uuid_test PUBLIC
   ${Boost_UNIT_TEST_FRAMEWORK}
   ${spdlog}
   pthread
+  RedisClient
 )
 
 target_link_libraries(logging_test PUBLIC
@@ -98,4 +102,5 @@ target_link_libraries(logging_test PUBLIC
   ${Boost_UNIT_TEST_FRAMEWORK}
   ${spdlog}
   pthread
+  RedisClient
 )
