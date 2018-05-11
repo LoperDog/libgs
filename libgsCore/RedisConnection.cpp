@@ -13,21 +13,32 @@ struct RedisConnectImpl
   RedisConnectImpl() : redis(ioService) {}
 };
 
-RedisConnection::RedisConnection(const RedisEndPoint& _endpoint) :
+RedisConnection::RedisConnection() :
   _pimpl(std::make_shared<RedisConnectImpl>())  
 {
-  _pimpl->endpoint = std::make_shared<RedisEndPoint>(_endpoint);
 }
 
 RedisConnection::~RedisConnection()
 {
 }
 
-bool RedisConnection::Connect()
+bool RedisConnection::Connect(const std::string& address, const unsigned short port)
 {
+  boost::system::error_code ec;
+  boost::asio::ip::address::from_string(address, ec);
+
+  if (ec)
+  {
+    std::cout << "Invalid Address, errcode : " << ec << std::endl;
+    return false;
+  }
+
+  _pimpl->endpoint = std::make_shared<RedisEndPoint>(address, port);
+
   bool isSuccess = false;
-  _pimpl->redis.connect(_pimpl->endpoint->address, _pimpl->endpoint->port, [this, &isSuccess](bool _isSuccess, std::string errcode) {
+  _pimpl->redis.connect(_pimpl->endpoint->address, _pimpl->endpoint->port, [&isSuccess](bool _isSuccess, std::string errcode) {
     isSuccess = _isSuccess;
+    std::cout << isSuccess << std::endl;
   });
 
   return isSuccess;

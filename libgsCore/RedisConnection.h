@@ -11,11 +11,11 @@ struct RedisConnectImpl;
 
 class RedisConnection
 {
-  RedisConnection(const RedisEndPoint& _endpoint);
  public:
+  RedisConnection();
   ~RedisConnection();
 
-  bool Connect();
+  bool Connect(const std::string& address, const unsigned short port);
  private:
   std::shared_ptr<RedisConnectImpl> _pimpl;
 };
