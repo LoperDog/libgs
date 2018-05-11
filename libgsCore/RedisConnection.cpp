@@ -5,7 +5,7 @@
 namespace libgs {
 namespace Redis {
 
-struct RedisConnectionImpl
+struct RedisConnection::RedisConnectionImpl
 {
   std::shared_ptr<RedisEndPoint> endpoint;
   boost::asio::io_service ioService;
@@ -14,7 +14,7 @@ struct RedisConnectionImpl
 };
 
 RedisConnection::RedisConnection() :
-  _pimpl(std::make_shared<RedisConnectionImpl>())
+  pimpl_(std::make_shared<RedisConnection::RedisConnectionImpl>())
 {
 }
 
@@ -33,10 +33,10 @@ bool RedisConnection::Connect(const std::string& address, const unsigned short p
     return false;
   }
 
-  _pimpl->endpoint = std::make_shared<RedisEndPoint>(address, port);
+  pimpl_->endpoint = std::make_shared<RedisEndPoint>(address, port);
 
   bool isSuccess = false;
-  _pimpl->redis.connect(_pimpl->endpoint->address, _pimpl->endpoint->port, [&isSuccess](bool _isSuccess, std::string errcode) {
+  pimpl_->redis.connect(pimpl_->endpoint->address, pimpl_->endpoint->port, [&isSuccess](bool _isSuccess, std::string errcode) {
     isSuccess = _isSuccess;
     std::cout << isSuccess << std::endl;
   });
