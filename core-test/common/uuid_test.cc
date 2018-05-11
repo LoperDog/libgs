@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include <include/libgs/common/uuid.h>
+#include "core/include/libgs/common/uuid.h"
 
 
 using boost::unit_test::test_suite;

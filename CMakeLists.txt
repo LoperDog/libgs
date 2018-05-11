@@ -25,11 +25,11 @@ include_directories(${CMAKE_SOURCE_DIR})
 find_package(Boost COMPONENTS system unit_test_framework REQUIRED)
 
 set(HEADER
-  ${CMAKE_SOURCE_DIR}/include/libgs/common/uuid.h
+  ${CMAKE_SOURCE_DIR}/core/include/libgs/common/uuid.h
 )
 
 set(CC
-  ${CMAKE_SOURCE_DIR}/src/common/uuid.cc
+  ${CMAKE_SOURCE_DIR}/core/src/common/uuid.cc
 )
 
 set(SOURCES ${HEADER} ${CC})
@@ -43,6 +43,32 @@ ${SOURCES}
 ${CMAKE_SOURCE_DIR}/unit_test/common/uuid_test.cc)
 
 target_link_libraries(libgs PUBLIC
- ${Boost_LIBRARIES}
- ${Boost_UNIT_TEST_FRAMEWORK}
+  ${Boost_LIBRARIES}
+  pthread
+)
+
+
+###########################################################################
+# CORE-TEST
+###########################################################################
+
+SET(TEST_CASES uuid_test)
+
+SET(TEST_CASE_IMPLEMENTATION
+  common/uuid_test)
+
+
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tests)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests/)
+
+
+add_executable(uuid_test
+  ${HEADER}
+  ${SOURCES}
+  ${CMAKE_SOURCE_DIR}/core-test/common/uuid_test.cc)
+
+target_link_libraries(uuid_test PUBLIC
+  ${Boost_LIBRARIES}
+  ${Boost_UNIT_TEST_FRAMEWORK}
+  pthread
 )
