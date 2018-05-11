@@ -7,7 +7,7 @@ namespace libgs {
 namespace Redis {
 
 struct RedisEndPoint;
-struct RedisConnectImpl;
+struct RedisConnectionImpl;
 
 class RedisConnection
 {
@@ -17,7 +17,7 @@ class RedisConnection
 
   bool Connect(const std::string& address, const unsigned short port);
  private:
-  std::shared_ptr<RedisConnectImpl> _pimpl;
+  std::shared_ptr<RedisConnectionImpl> _pimpl;
 };
 
 }

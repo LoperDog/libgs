@@ -5,16 +5,16 @@
 namespace libgs {
 namespace Redis {
 
-struct RedisConnectImpl
+struct RedisConnectionImpl
 {
   std::shared_ptr<RedisEndPoint> endpoint;
   boost::asio::io_service ioService;
   redisclient::RedisAsyncClient redis;
-  RedisConnectImpl() : redis(ioService) {}
+  RedisConnectionImpl() : redis(ioService) {}
 };
 
 RedisConnection::RedisConnection() :
-  _pimpl(std::make_shared<RedisConnectImpl>())  
+  _pimpl(std::make_shared<RedisConnectionImpl>())
 {
 }
 
