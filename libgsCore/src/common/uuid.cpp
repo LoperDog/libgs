@@ -1,4 +1,4 @@
-#include "core/include/libgs/common/uuid.h"
+#include "common/uuid.h"
 
 #include <boost/lexical_cast.hpp>
 #include <boost/uuid/uuid_io.hpp>

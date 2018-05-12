@@ -28,6 +28,8 @@ find_package(spdlog CONFIG REQUIRED)
 include_directories(spdlog)
 
 set(HEADER
+  ${CMAKE_SOURCE_DIR}/libgsCore/include/common/logging.h
+  ${CMAKE_SOURCE_DIR}/libgsCore/include/common/uuid.h
   ${CMAKE_SOURCE_DIR}/libgsCore/include/redis/redis_connection.h
   ${CMAKE_SOURCE_DIR}/libgsCore/include/redis/redis_parameter.h
   ${CMAKE_SOURCE_DIR}/libgsCore/include/stdafx.h
@@ -36,6 +38,8 @@ set(HEADER
 )
 
 set(CC
+  ${CMAKE_SOURCE_DIR}/libgsCore/src/common/logging.cpp
+  ${CMAKE_SOURCE_DIR}/libgsCore/src/common/uuid.cpp
   ${CMAKE_SOURCE_DIR}/libgsCore/src/redis/redis_connection.cpp
   ${CMAKE_SOURCE_DIR}/libgsCore/src/stdafx.cpp
 )

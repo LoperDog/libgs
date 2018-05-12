@@ -1,4 +1,4 @@
-#include "core/include/libgs/common/logging.h"
+#include "common/logging.h"
 
 #include <boost/thread/mutex.hpp>
 #include <spdlog/spdlog.h>
