@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "RedisConnection.h"
-#include "RedisParameter.h"
+#include "Redis/RedisConnection.h"
+#include "Redis/RedisParameter.h"
 
 namespace libgs {
 namespace Redis {
@@ -38,6 +38,7 @@ bool RedisConnection::Connect(const std::string& address, const unsigned short p
   bool isSuccess = false;
   pimpl_->redis.connect(pimpl_->endpoint->address, pimpl_->endpoint->port, [&isSuccess](bool _isSuccess, std::string errcode) {
     isSuccess = _isSuccess;
+    std::cout << "Connect!" << std::endl;
   });
   pimpl_->ioService.run();
 

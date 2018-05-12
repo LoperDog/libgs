@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "RedisConnection.h"
-#include "RedisParameter.h"
+#include "Redis/RedisConnection.h"
+#include "Redis/RedisParameter.h"
 
 
 int main()
