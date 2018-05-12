@@ -28,22 +28,27 @@ find_package(spdlog CONFIG REQUIRED)
 include_directories(spdlog)
 
 set(HEADER
-  ${CMAKE_SOURCE_DIR}/core/include/libgs/common/uuid.h
-  ${CMAKE_SOURCE_DIR}/core/include/libgs/common/logging.h
+  ${CMAKE_SOURCE_DIR}/libgsCore/include/redis/redis_connection.h
+  ${CMAKE_SOURCE_DIR}/libgsCore/include/redis/redis_parameter.h
+  ${CMAKE_SOURCE_DIR}/libgsCore/include/stdafx.h
+  ${CMAKE_SOURCE_DIR}/libgsCore/include/targetver.h
+
 )
 
 set(CC
-  ${CMAKE_SOURCE_DIR}/core/src/common/uuid.cc
-  ${CMAKE_SOURCE_DIR}/core/src/common/logging.cc
+  ${CMAKE_SOURCE_DIR}/libgsCore/src/redis/redis_connection.cpp
+  ${CMAKE_SOURCE_DIR}/libgsCore/src/stdafx.cpp
 )
 
 set(SOURCES ${HEADER} ${CC})
 
 include_directories(${HEADER})
+include_directories(${CMAKE_SOURCE_DIR}/libgsCore/include)
 
 # TODO(inkeun): 추후에 third-party library 빌드용
 #               cmake 를 별도로 만든다.
-include_directories(${CMAKE_SOURCE_DIR}/third-party)
+include_directories(${CMAKE_SOURCE_DIR}/Vendor/redisclient-0.5/src)
+
 
 ###########################################################################
 # CORE
@@ -52,54 +57,10 @@ include_directories(${CMAKE_SOURCE_DIR}/third-party)
 add_executable(libgs
   ${HEADER}
   ${SOURCES}
-  ${CMAKE_SOURCE_DIR}/core/src/main.cc)
+  ${CMAKE_SOURCE_DIR}/libgsCore/src/main.cc)
 
 target_link_libraries(libgs PUBLIC
   ${Boost_LIBRARIES}
-  ${spdlog}
-  pthread
-)
-
-
-###########################################################################
-# CORE-TEST
-###########################################################################
-
-SET(TEST_CASES
-  uuid_test
-  logging_test)
-
-SET(TEST_CASE_IMPLEMENTATION
-  common/uuid_test
-  common/logging_test)
-
-
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/tests)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests/)
-
-
-add_executable(uuid_test
-  ${HEADER}
-  ${SOURCES}
-  ${CMAKE_SOURCE_DIR}/core-test/common/uuid_test.cc)
-
-add_executable(logging_test
-  ${HEADER}
-  ${SOURCES}
-  ${CMAKE_SOURCE_DIR}/core-test/common/logging_test.cc)
-
-
-target_link_libraries(uuid_test PUBLIC
-  ${Boost_LIBRARIES}
-  ${Boost_UNIT_TEST_FRAMEWORK}
-  ${spdlog}
-  pthread
-  RedisClient
-)
-
-target_link_libraries(logging_test PUBLIC
-  ${Boost_LIBRARIES}
-  ${Boost_UNIT_TEST_FRAMEWORK}
   ${spdlog}
   pthread
   RedisClient

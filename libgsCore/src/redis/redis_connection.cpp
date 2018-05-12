@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "Redis/RedisConnection.h"
-#include "Redis/RedisParameter.h"
+#include "redis/redis_connection.h"
+#include "redis/redis_parameter.h"
+
 
 namespace libgs {
 namespace Redis {

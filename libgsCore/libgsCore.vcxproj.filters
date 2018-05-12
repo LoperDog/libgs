@@ -11,10 +11,10 @@
     <Filter Include="src">
       <UniqueIdentifier>{625f0f0f-f9d6-48fe-83f0-8da2152eb8b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="include\Redis">
+    <Filter Include="include\redis">
       <UniqueIdentifier>{33045d1b-e926-4ab5-b074-a530e3257b8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Redis">
+    <Filter Include="src\redis">
       <UniqueIdentifier>{1e1c4101-7bd7-4f24-8ab0-9406e8f3cf41}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -25,10 +25,10 @@
     <ClInclude Include="include\targetver.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Redis\RedisConnection.h">
+    <ClInclude Include="include\redis\redis_connection.h">
       <Filter>include\Redis</Filter>
     </ClInclude>
-    <ClInclude Include="include\Redis\RedisParameter.h">
+    <ClInclude Include="include\redis\redis_parameter.h">
       <Filter>include\Redis</Filter>
     </ClInclude>
   </ItemGroup>
@@ -36,7 +36,7 @@
     <ClCompile Include="src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Redis\RedisConnection.cpp">
+    <ClCompile Include="src\redis\redis_connection.cpp">
       <Filter>src\Redis</Filter>
     </ClCompile>
   </ItemGroup>

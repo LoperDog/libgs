@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Redis\RedisConnection.h" />
-    <ClInclude Include="include\Redis\RedisParameter.h" />
+    <ClInclude Include="include\redis\redis_connection.h" />
+    <ClInclude Include="include\redis\redis_parameter.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Redis\RedisConnection.cpp" />
+    <ClCompile Include="src\redis\redis_connection.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
