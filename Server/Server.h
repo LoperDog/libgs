@@ -22,11 +22,11 @@ namespace app {
     void OnRecive() {
 
     }
-    // 엑셉트 시작 전에 할일 .
+    // 엑셉트 시작 전에 할일.
     void PostAccept() 
     {
-      
       std::cout << "ready to accept" << std::endl;
+      
       object * newuuid = new object();
       USession * user = new USession(acceptor_.get_io_service());
       uuidlist.push(newuuid);

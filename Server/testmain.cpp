@@ -8,7 +8,7 @@ int main() {
   app::Server First(t);
 
   std::thread th([]() {
-    Sleep(3000);
+    Sleep(3);
     std::cout << "add client;" << std::endl;
     
     boost::shared_ptr<app::TCPClient> testClient =

@@ -58,11 +58,13 @@ namespace app {
         boost::bind(&TCPClient::handle_connect,this, boost::asio::placeholders::error
         )
       );
+      ioservice_.run();
     }
    
   private : 
     void handle_connect(const boost::system::error_code& error)
     {
+      boost::lock_guard<boost::mutex> guard(mutex_);
       if (error)
       {
         std::cout << "connect failed : " << error.message() << std::endl;
@@ -76,6 +78,8 @@ namespace app {
     boost::asio::io_service ioservice_; 
     TCPSocket socket_;
     TCPEndPoint ep_;
+
+    boost::mutex mutex_;
   };
 }
 #endif // !ASIO_SERVER_SERVER_H
