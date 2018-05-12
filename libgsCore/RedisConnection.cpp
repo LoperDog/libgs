@@ -38,8 +38,8 @@ bool RedisConnection::Connect(const std::string& address, const unsigned short p
   bool isSuccess = false;
   pimpl_->redis.connect(pimpl_->endpoint->address, pimpl_->endpoint->port, [&isSuccess](bool _isSuccess, std::string errcode) {
     isSuccess = _isSuccess;
-    std::cout << isSuccess << std::endl;
   });
+  pimpl_->ioService.run();
 
   return isSuccess;
 }
