@@ -32,10 +32,10 @@ namespace app {
 
     }
     void StartRecv(const boost::shared_ptr<USession> &session_) {
+      std::cout << "Server : Start recv" << std::endl;
       memset(&buffer_, '\0', sizeof(buffer_));
       //boost::make_shared<USession>(session_)->Socket();
       
-<<<<<<< HEAD
       session_->Socket().async_read_some(
         boost::asio::buffer(buffer_),
         boost::bind(&TCPServer::ReadSend, this,
@@ -47,16 +47,6 @@ namespace app {
     void ReadSend(const boost::system::error_code& error, const size_t si) {
       std::cout << "doing recv!" << std::endl;
       std::cout << buffer_.data() << std::endl;
-=======
-      //session->Socket().async_read_some(
-
-      //);
-      session_->Socket();
-    }
-  private:
-    void ReadSend() {
-
->>>>>>> ef7a455698a6510f2f58f8968a1f675897988ffc
     }
     bool is_connect_;
     Buffer buffer_;
