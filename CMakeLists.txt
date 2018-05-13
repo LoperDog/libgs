@@ -34,7 +34,6 @@ set(HEADER
   ${CMAKE_SOURCE_DIR}/libgsCore/include/redis/redis_parameter.h
   ${CMAKE_SOURCE_DIR}/libgsCore/include/stdafx.h
   ${CMAKE_SOURCE_DIR}/libgsCore/include/targetver.h
-
 )
 
 set(CC
@@ -61,7 +60,7 @@ include_directories(${CMAKE_SOURCE_DIR}/Vendor/redisclient-0.5/src)
 add_executable(libgs
   ${HEADER}
   ${SOURCES}
-  ${CMAKE_SOURCE_DIR}/libgsCore/src/main.cc)
+  ${CMAKE_SOURCE_DIR}/libgsCore/src/main.cpp)
 
 target_link_libraries(libgs PUBLIC
   ${Boost_LIBRARIES}
