@@ -45,9 +45,13 @@ namespace app {
     }
   private :
 
+<<<<<<< HEAD
     void Handle_accept(const boost::shared_ptr<USession> session, const boost::system::error_code& error) {
       boost::lock_guard<boost::mutex> g(mutex_);
       std::cout << "접속 요청으로 인한 메소드 호출" << std::endl;
+=======
+    void Handle_accept(boost::shared_ptr<USession> session, const boost::system::error_code& error) {
+>>>>>>> ef7a455698a6510f2f58f8968a1f675897988ffc
       if (!error) {
         std::cout << "무언가 접속" << std::endl;
         PostAccept();
