@@ -27,8 +27,8 @@ namespace app {
     {
       std::cout << "ready to accept" << std::endl;
       
-      object * newuuid = new object();
-      USession * user = new USession(acceptor_.get_io_service());
+      boost::shared_ptr<object> newuuid(new object());
+      boost::shared_ptr<USession> user(new USession(acceptor_.get_io_service()));
       uuidlist.push(newuuid);
 
       userlist.insert(std::make_pair(newuuid, user));
@@ -43,10 +43,12 @@ namespace app {
 
     }
   private :
-    void Handle_accept(USession * session, const boost::system::error_code& error) {
+
+    void Handle_accept(boost::shared_ptr<USession> session, const boost::system::error_code& error) {
       if (!error) {
         std::cout << "公攫啊 立加" << std::endl;
         PostAccept();
+        server_->StartRecv(session/*->Socket()*/);
       }
     }
 
@@ -57,9 +59,9 @@ namespace app {
     TCPAsyncAcceptor acceptor_;
 
     // uuid客 鞍捞 技记阑 历厘包府茄促.
-    std::map<object*, USession*> userlist;
+    std::map<boost::shared_ptr<object>, boost::shared_ptr<USession>> userlist;
     // uuid甫 包府茄促
-    std::queue<object*> uuidlist;
+    std::queue<boost::shared_ptr<object>> uuidlist;
 
   };
 }

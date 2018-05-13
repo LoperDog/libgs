@@ -357,3 +357,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+asio_sample-app/
+asio_sample_server/
+asio_sample_client/

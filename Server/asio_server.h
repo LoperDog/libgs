@@ -26,21 +26,25 @@ namespace app {
  
     //void OnRecved
     TCPServer(){}
-    //TCPSocket& Socket() { return socket_; }
-
-    void AcceptHandler(const boost::system::error_code& error) {
-
-    }
+    
     void TcpSend() {
 
     }
-    void OnRecv() {
+    void StartRecv(const boost::shared_ptr<USession> &session_) {
+      memset(&buffer_, '\0', sizeof(buffer_));
+      //boost::make_shared<USession>(session_)->Socket();
+      
+      //session->Socket().async_read_some(
 
+      //);
+      session_->Socket();
     }
   private:
-    //
+    void ReadSend() {
+
+    }
     bool is_connect_;
-  
+    Buffer buffer_;
   };
   
   class TCPClient : public boost::enable_shared_from_this<TCPClient> 
