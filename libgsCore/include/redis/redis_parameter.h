@@ -4,17 +4,19 @@
 
 
 namespace libgs {
-namespace Redis {
 
-struct RedisEndPoint
-{
+namespace redis {
+
+struct RedisEndPoint {
+  RedisEndPoint(const std::string& _address, const unsigned short _port)
+      : address(boost::asio::ip::address::from_string(_address)),
+        port(_port) {
+  }
+
   boost::asio::ip::address address;
   const unsigned short port;
-
-  RedisEndPoint(const std::string& _address, const unsigned short _port) :
-    address(boost::asio::ip::address::from_string(_address)),
-    port(_port) { }
 };
 
-}
-}
+}  // namespace redis
+
+}  // namespace libgs

@@ -1,22 +1,33 @@
 #pragma once
-#include <boost/asio/io_service.hpp>
-#include <boost/asio/ip/address.hpp>
-#include <redisclient/redisasyncclient.h>
+
+#include <string>
+#include <memory>
+
 
 namespace libgs {
-namespace Redis {
 
-class RedisConnection
-{
+namespace redis {
+
+class RedisConnection {
  public:
+  using ConnectCallback =
+      std::function<void(const bool /*success*/,
+                         const std::string& /*error_message*/)>;
+
   RedisConnection();
   ~RedisConnection();
 
-  bool Connect(const std::string& address, const unsigned short port);
+  void Connect(const std::string& address, const uint16_t port,
+               const ConnectCallback &cb);
+
  private:
   struct RedisConnectionImpl;
-  std::shared_ptr<RedisConnectionImpl> pimpl_;
+  std::unique_ptr<RedisConnectionImpl> pimpl_;
 };
 
-}
-}
+
+void InitializeRedisIoService();
+
+}  // namespace redis
+
+}  // namespace libgs
