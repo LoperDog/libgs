@@ -50,7 +50,7 @@ namespace app {
   private :
 
     void Handle_accept(const boost::shared_ptr<USession> session, const boost::system::error_code& error) {
-      //boost::lock_guard<boost::mutex> g(mutex_);
+      boost::lock_guard<boost::mutex> g(mutex_);
       std::cout << "접속 요청으로 인한 메소드 호출" << std::endl;
 
       if (!error) {
