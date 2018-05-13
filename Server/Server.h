@@ -16,7 +16,9 @@ namespace app {
     void StartServer(const boost::asio::io_service& _io);
     
     Server(Property& _property) : 
-      acceptor_(ioservice_,TCPEndPoint(boost::asio::ip::tcp::v4(),_property.port)) {
+      acceptor_(ioservice_,
+        TCPEndPoint(boost::asio::ip::tcp::v4(),_property.port)) {
+
       StartServer(ioservice_);
     }
     void OnRecive() {
@@ -26,16 +28,18 @@ namespace app {
     void PostAccept() 
     {
       std::cout << "ready to accept" << std::endl;
+      boost::lock_guard<boost::mutex> g(mutex_);
+      boost::shared_ptr<object> newuuid = boost::make_shared<object>();
+      boost::shared_ptr<USession> user = boost::make_shared<USession>(acceptor_.get_io_service());
       
-      boost::shared_ptr<object> newuuid(new object());
-      boost::shared_ptr<USession> user(new USession(acceptor_.get_io_service()));
       uuidlist.push(newuuid);
 
       userlist.insert(std::make_pair(newuuid, user));
 
       acceptor_.async_accept(userlist[newuuid]->Socket(),
         boost::bind(&Server::Handle_accept,
-          this, user, boost::asio::placeholders::error));
+          this, userlist[newuuid], boost::asio::placeholders::error)); 
+
       std::cout << "before the Fucking accept" << std::endl;
     }
 
@@ -46,12 +50,19 @@ namespace app {
   private :
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     void Handle_accept(boost::shared_ptr<USession> session, const boost::system::error_code& error) {
 =======
+=======
+>>>>>>> ff9471c... ì–µìƒ™íŠ¸ëŠ” ì™„ë£Œ
     void Handle_accept(const boost::shared_ptr<USession> session, const boost::system::error_code& error) {
-      boost::lock_guard<boost::mutex> g(mutex_);
+      //boost::lock_guard<boost::mutex> g(mutex_);
       std::cout << "Á¢¼Ó ¿äÃ»À¸·Î ÀÎÇÑ ¸Þ¼Òµå È£Ãâ" << std::endl;
+<<<<<<< HEAD
 >>>>>>> 931a35c... WIP:ë¦¬ì‹œë¸Œ ìž‘ì—…ì¤‘
+=======
+
+>>>>>>> ff9471c... ì–µìƒ™íŠ¸ëŠ” ì™„ë£Œ
       if (!error) {
         std::cout << "¹«¾ð°¡ Á¢¼Ó" << std::endl;
         PostAccept();
