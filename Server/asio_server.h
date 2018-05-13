@@ -1,10 +1,11 @@
 #ifndef ASIO_SERVER_SERVER_H
 #define ASIO_SERVER_SERVER_H
 
+#include <boost/enable_shared_from_this.hpp>
+
 #include "common.h"
 #include "uuid.h"
-
-#include <boost/enable_shared_from_this.hpp>
+#include "USession.h"
 
 namespace app {
   // 서버 속성
@@ -26,21 +27,28 @@ namespace app {
  
     //void OnRecved
     TCPServer(){}
-    //TCPSocket& Socket() { return socket_; }
-
-    void AcceptHandler(const boost::system::error_code& error) {
-
-    }
+    
     void TcpSend() {
 
     }
-    void OnRecv() {
-
+    void StartRecv(const boost::shared_ptr<USession> &session_) {
+      memset(&buffer_, '\0', sizeof(buffer_));
+      //boost::make_shared<USession>(session_)->Socket();
+      
+      session_->Socket().async_read_some(
+        boost::asio::buffer(buffer_),
+        boost::bind(&TCPServer::ReadSend, this,
+          boost::asio::placeholders::error,
+          boost::asio::placeholders::bytes_transferred)
+      );
     }
   private:
-    //
+    void ReadSend(const boost::system::error_code& error, const size_t si) {
+      std::cout << "doing recv!" << std::endl;
+      std::cout << buffer_.data() << std::endl;
+    }
     bool is_connect_;
-  
+    Buffer buffer_;
   };
   
   class TCPClient : public boost::enable_shared_from_this<TCPClient> 
@@ -55,7 +63,8 @@ namespace app {
     void Connect()
     {
       socket_.async_connect(ep_,
-        boost::bind(&TCPClient::handle_connect,this, boost::asio::placeholders::error
+        boost::bind(&TCPClient::handle_connect,this,
+          boost::asio::placeholders::error
         )
       );
       ioservice_.run();
@@ -72,7 +81,24 @@ namespace app {
       else
       {
         std::cout << "connected" << std::endl;
+        // Send Test();
+        testSend();
       }
+    }
+    void testSend() {
+      boost::asio::async_write(
+        socket_,
+        boost::asio::buffer("tqwotml"),
+        [this](boost::system::error_code ec, std::size_t) 
+      {
+        if (!ec) {
+
+          std::cout << "client Send No err" << std::endl;
+        }
+        else {
+          std::cout << "client Send Error" << std::endl;
+        }
+      });
     }
 
     boost::asio::io_service ioservice_; 
