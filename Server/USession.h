@@ -1,5 +1,6 @@
 #ifndef USESSION_USESSUIN_H
 #define USESSION_USESSUIN_H
+
 #include "common.h"
 
 class USession

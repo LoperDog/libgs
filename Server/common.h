@@ -2,19 +2,20 @@
 #ifndef COMMON_COMMON_H
 #define COMMON_COMMON_H
 
-#include <iostream>
 #include <algorithm>
-#include <string>
-#include <list>
 #include <array>
+#include <iostream>
+#include <list>
 #include <map>
-#include <boost/bind.hpp>
+#include <string>
+
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/thread/mutex.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
+#include <boost/thread/mutex.hpp>
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 4439

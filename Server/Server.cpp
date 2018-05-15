@@ -3,8 +3,9 @@
 // 서버를 시작한다
 void app::Server::StartServer(const boost::asio::io_service& _io) {
   
-  ioservice_.run();
   PostAccept();
+
+  ioservice_.run();
   /*
   boost::lock_guard<boost::mutex> guard(mutex_);
   // 서버 프로퍼티를 넘겨준다.
