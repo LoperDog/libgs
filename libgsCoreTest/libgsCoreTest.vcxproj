@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\boost_1_58_0;$(ProjectDir)..\Vendor\redisclient-0.5\src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\boost_1_58_0;$(ProjectDir)..\Vendor\redisclient-0.5\src;$(ProjectDir)include;C:\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +143,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\boost_1_58_0;$(ProjectDir)..\Vendor\redisclient-0.5\src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\boost_1_58_0;$(ProjectDir)..\Vendor\redisclient-0.5\src;$(ProjectDir)include;C:\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
