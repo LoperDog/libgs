@@ -97,7 +97,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\grpc\.build\Debug;C:\grpc\.build\third_party\protobuf\Debug;C:\grpc\.build\third_party\boringssl\ssl\Debug;C:\grpc\.build\third_party\boringssl\crypto\Debug;C:\grpc\.build\third_party\zlib\Debug;C:\boost_1_58_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\grpc\.build\Debug;C:\grpc\.build\third_party\protobuf\Debug;C:\grpc\.build\third_party\boringssl\ssl\Debug;C:\grpc\.build\third_party\boringssl\crypto\Debug;C:\grpc\.build\third_party\zlib\Debug;C:\boost_1_58_0\stage\lib;$(ProjectDir)..\lib\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>gpr.lib;grpc++.lib;grpc.lib;ssl.lib;crypto.lib;libprotobufd.lib;zlibstaticd.lib;libgsCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
