@@ -1,4 +1,4 @@
-#ifdef WIN32
+#ifdef __WIN32
 
 #pragma once
 
