@@ -68,5 +68,4 @@ target_link_libraries(libgs PUBLIC
   ${Boost_LIBRARIES}
   ${spdlog}
   pthread
-  RedisClient
 )
