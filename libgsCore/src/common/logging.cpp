@@ -43,8 +43,8 @@ class Logger::Impl {
   void Warn(const std::string &msg);
   void Warn(const std::stringstream &msg);
 
-  void Log(const Type &severity, const std::string &msg);
-  void Log(const Type &severity,
+  void Log(const Serverity &severity, const std::string &msg);
+  void Log(const Serverity &severity,
            const std::stringstream &msg);
 
   const std::string &filename() const;
@@ -130,28 +130,28 @@ void Logger::Impl::Warn(const std::stringstream &msg) {
 }
 
 
-void Logger::Impl::Log(const Type &severity, const std::string &msg) {
+void Logger::Impl::Log(const Serverity &severity, const std::string &msg) {
   switch (severity) {
-    case CRITICAL:
+    case Serverity::CRITICAL:
     Critical(msg);
     return;
 
-    case ERROR:
+    case Serverity::ERROR:
     Error(msg);
     return;
 
-    case INFO:
+    case Serverity::INFO:
     Info(msg);
     return;
 
-    case WARN:
+    case Serverity::WARN:
     Warn(msg);
     return;
   }
 }
 
 
-void Logger::Impl::Log(const Type &severity,
+void Logger::Impl::Log(const Serverity &severity,
                        const std::stringstream &msg) {
   Log(severity, msg.str());
 }
@@ -278,12 +278,12 @@ void Logger::Warn(const std::stringstream &msg) {
 }
 
 
-void Logger::Log(const Type &severity, const std::string &msg) {
+void Logger::Log(const Serverity &severity, const std::string &msg) {
   impl_->Log(severity, msg);
 }
 
 
-void Logger::Log(const Type &severity, const std::stringstream &msg) {
+void Logger::Log(const Serverity &severity, const std::stringstream &msg) {
   impl_->Log(severity, msg);
 }
 

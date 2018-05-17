@@ -9,7 +9,7 @@ namespace libgs {
 
 class Logger {
  public:
-  enum Serverity {
+  enum class Serverity {
     CRITICAL,
     ERROR,
     INFO,
@@ -17,7 +17,7 @@ class Logger {
   };
 
   // TODO: append syslog
-  enum Type {
+  enum class Type {
     kConsole,
     kDaily,
     kRotate
@@ -64,8 +64,8 @@ class Logger {
   void Warn(const std::string &msg);
   void Warn(const std::stringstream &msg);
 
-  void Log(const Type &severity, const std::string &msg);
-  void Log(const Type &severity, const std::stringstream &msg);
+  void Log(const Serverity &severity, const std::string &msg);
+  void Log(const Serverity &severity, const std::stringstream &msg);
 
   const std::string &filename() const;
   const std::string &name() const;
