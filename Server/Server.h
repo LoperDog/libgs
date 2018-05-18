@@ -12,56 +12,32 @@ namespace app {
   class Server
   {
   public :
-
     void StartServer(const boost::asio::io_service& _io);
     
     Server(Property& _property) : 
       acceptor_(ioservice_,
         TCPEndPoint(boost::asio::ip::tcp::v4(),_property.port)) {
-
+			server_ = boost::make_shared<TCPServer>();
       StartServer(ioservice_);
     }
-    void OnRecive() {
-
-    }
+		void OnRecive() {}
     // 엑셉트 시작 전에 할일.
-    void PostAccept() 
-    {
-      std::cout << "ready to accept" << std::endl;
-      boost::lock_guard<boost::mutex> g(mutex_);
-      boost::shared_ptr<object> newuuid = boost::make_shared<object>();
-      boost::shared_ptr<USession> user = boost::make_shared<USession>(acceptor_.get_io_service());
-      
-      uuidlist.push(newuuid);
+		void PostAccept();
 
-      userlist.insert(std::make_pair(newuuid, user));
-
-      acceptor_.async_accept(userlist[newuuid]->Socket(),
-        boost::bind(&Server::Handle_accept,
-          this, userlist[newuuid], boost::asio::placeholders::error)); 
-
-      std::cout << "before the Fucking accept" << std::endl;
-    }
+		void SendtoClient();
 
     void CloseSession() 
     {
-
     }
   private :
 
-    void Handle_accept(const boost::shared_ptr<USession> session, const boost::system::error_code& error) {
-      boost::lock_guard<boost::mutex> g(mutex_);
-      std::cout << "접속 요청으로 인한 메소드 호출" << std::endl;
-
-      if (!error) {
-        std::cout << "무언가 접속" << std::endl;
-        PostAccept();
-        server_->StartRecv(session/*->Socket()*/);
-      }
-    }
+		void Handle_accept(boost::shared_ptr<USession> session,
+			const boost::system::error_code& error);
 
     boost::shared_ptr<TCPServer> server_;
-    boost::mutex mutex_;
+
+		boost::mutex mutex_;
+		boost::mutex mutex_1;
     
     boost::asio::io_service ioservice_;
     TCPAsyncAcceptor acceptor_;
