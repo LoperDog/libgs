@@ -4,12 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgsServer", "libgsServer\libgsServer.vcxproj", "{478028AB-85E9-4972-AB4D-57EC9B4B8FD6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BD5A2256-F213-4BF9-8FE1-132457473CE2} = {BD5A2256-F213-4BF9-8FE1-132457473CE2}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgsClient", "libgsClient\libgsClient.vcxproj", "{667CE9B0-7AD7-4EDB-B9FB-B9C8FB6ABA13}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BD5A2256-F213-4BF9-8FE1-132457473CE2} = {BD5A2256-F213-4BF9-8FE1-132457473CE2}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgsCore", "libgsCore\libgsCore.vcxproj", "{BD5A2256-F213-4BF9-8FE1-132457473CE2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgsCoreTest", "libgsCoreTest\libgsCoreTest.vcxproj", "{F3D6131B-F764-43F7-9C82-4766057340B8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BD5A2256-F213-4BF9-8FE1-132457473CE2} = {BD5A2256-F213-4BF9-8FE1-132457473CE2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
