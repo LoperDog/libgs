@@ -19,12 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\common\uuid.h" />
+    <ClInclude Include="include\network\asio_server.h" />
+    <ClInclude Include="include\network\common.h" />
+    <ClInclude Include="include\network\Server.h" />
+    <ClInclude Include="include\network\USession.h" />
     <ClInclude Include="include\redis\redis_connection.h" />
     <ClInclude Include="include\redis\redis_parameter.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\common\uuid.cpp" />
+    <ClCompile Include="src\network\asio_server.cpp" />
+    <ClCompile Include="src\network\Server.cpp" />
+    <ClCompile Include="src\network\USession.cpp" />
     <ClCompile Include="src\redis\redis_connection.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -37,6 +46,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libgsCore</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

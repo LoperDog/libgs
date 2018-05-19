@@ -34,7 +34,7 @@
     <ProjectGuid>{478028AB-85E9-4972-AB4D-57EC9B4B8FD6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libgsServer</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

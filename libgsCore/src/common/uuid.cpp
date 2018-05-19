@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "common/uuid.h"
 
 #include <boost/lexical_cast.hpp>

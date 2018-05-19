@@ -31,6 +31,11 @@
     <ClInclude Include="include\redis\redis_parameter.h">
       <Filter>include\Redis</Filter>
     </ClInclude>
+    <ClInclude Include="include\common\uuid.h" />
+    <ClInclude Include="include\network\asio_server.h" />
+    <ClInclude Include="include\network\common.h" />
+    <ClInclude Include="include\network\Server.h" />
+    <ClInclude Include="include\network\USession.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -39,5 +44,9 @@
     <ClCompile Include="src\redis\redis_connection.cpp">
       <Filter>src\Redis</Filter>
     </ClCompile>
+    <ClCompile Include="src\common\uuid.cpp" />
+    <ClCompile Include="src\network\asio_server.cpp" />
+    <ClCompile Include="src\network\Server.cpp" />
+    <ClCompile Include="src\network\USession.cpp" />
   </ItemGroup>
 </Project>
