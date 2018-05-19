@@ -87,6 +87,8 @@ class ThreadPool::Impl {
   void Start();
   void Stop();
 
+  const std::shared_ptr<boost::asio::io_service> io_service();
+
  private:
   using StrandMap = std::map<
       const std::string /*name*/,
@@ -98,7 +100,7 @@ class ThreadPool::Impl {
   const std::shared_ptr<boost::asio::strand> &GetOrCreateStrand(
       const std::string &name);
 
-  std::mutex mutex_;
+  mutable std::mutex mutex_;
   std::string name_;
   bool initialized_;
   bool running_;
@@ -142,6 +144,7 @@ void ThreadPool::Impl::Post(const Function &function,
 }
 
 
+// 락을 잡은 체로 호출한다.
 void ThreadPool::Impl::Start() {
   io_worker_ = std::make_shared<IoServiceWorker>(io_service_);
   io_worker_->Start();
@@ -150,6 +153,13 @@ void ThreadPool::Impl::Start() {
 
 void ThreadPool::Impl::Stop() {
 
+}
+
+
+const std::shared_ptr<boost::asio::io_service>
+    ThreadPool::Impl::io_service() {
+  std::lock_guard<std::mutex> lock(mutex_);
+  return io_service_;
 }
 
 
@@ -249,6 +259,12 @@ void ThreadPool::Post(const Function &function,
   } else {
     impl_->Post(function, serialization_tag);
   }
+}
+
+
+const std::shared_ptr<boost::asio::io_service>
+    ThreadPool::io_service() {
+  return impl_->io_service();
 }
 
 }  // namespace libgs

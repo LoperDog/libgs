@@ -5,6 +5,8 @@
 #include <string>
 #include <memory>
 
+#include <boost/asio/io_service.hpp>
+
 
 namespace libgs {
 
@@ -28,6 +30,8 @@ class ThreadPool: public std::enable_shared_from_this<ThreadPool> {
 
   void Post(const Function &function,
             const std::string &serialization_tag="");
+
+  const std::shared_ptr<boost::asio::io_service> io_service();
 
  private:
   class Impl;
