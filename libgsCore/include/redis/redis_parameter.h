@@ -1,4 +1,5 @@
 #pragma once
+
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/address.hpp>
 
@@ -13,7 +14,7 @@ struct RedisEndPoint {
         port(_port) {
   }
 
-  boost::asio::ip::address address;
+  const boost::asio::ip::address address;
   const unsigned short port;
 };
 

@@ -22,7 +22,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-find_package(Boost REQUIRED COMPONENTS system filesystem unit_test_framework)
+find_package(Boost REQUIRED COMPONENTS thread system filesystem unit_test_framework)
 find_package(spdlog CONFIG REQUIRED)
 
 include_directories(spdlog)
