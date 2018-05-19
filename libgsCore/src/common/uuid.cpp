@@ -1,5 +1,7 @@
 #include "common/uuid.h"
 
+#include "stdafx.h"
+
 #include <boost/lexical_cast.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/uuid/uuid_generators.hpp>

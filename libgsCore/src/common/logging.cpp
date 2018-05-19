@@ -1,5 +1,7 @@
 #include "common/logging.h"
 
+#include "stdafx.h"
+
 #include <boost/thread/mutex.hpp>
 #include <spdlog/spdlog.h>
 #include <memory>
