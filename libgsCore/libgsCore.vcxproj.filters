@@ -11,6 +11,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{625f0f0f-f9d6-48fe-83f0-8da2152eb8b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\common">
+      <UniqueIdentifier>{33045d1b-e926-4ab5-b074-a530e3257b8b}</UniqueIdentifier>
+    </Filter>
     <Filter Include="include\redis">
       <UniqueIdentifier>{33045d1b-e926-4ab5-b074-a530e3257b8c}</UniqueIdentifier>
     </Filter>
@@ -31,6 +34,12 @@
     <ClInclude Include="include\targetver.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\common\logging.h">
+      <Filter>include\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common\uuid.h">
+      <Filter>include\Common</Filter>
+    </ClInclude>
     <ClInclude Include="include\redis\redis_connection.h">
       <Filter>include\Redis</Filter>
     </ClInclude>
@@ -44,6 +53,12 @@
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\logging.cpp">
+      <Filter>src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\uuid.cpp">
+      <Filter>src\Common</Filter>
     </ClCompile>
     <ClCompile Include="src\redis\redis_connection.cpp">
       <Filter>src\Redis</Filter>
