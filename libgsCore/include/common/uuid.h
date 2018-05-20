@@ -27,6 +27,8 @@ class Uuid {
   boost::uuids::uuid uuid_;
 };
 
+bool operator< (const Uuid& lhs, const Uuid& rhs);
+
 }  // namespace libgs
 
 #endif  // INCLUDE_LIBGS_COMMON_UUID_H_

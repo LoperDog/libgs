@@ -5,3 +5,5 @@
 
 #include "targetver.h"
 #include <iostream>
+
+#include "boost/assert.hpp"

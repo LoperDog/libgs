@@ -42,7 +42,11 @@ const boost::uuids::uuid &Uuid::raw_uuid() const {
   return uuid_;
 }
 
-
 boost::uuids::uuid Uuid::kNilUuid = boost::uuids::nil_uuid();
+
+bool operator< (const Uuid& lhs, const Uuid& rhs)
+{
+  return lhs.raw_uuid() < rhs.raw_uuid();
+}
 
 }  // namespace libgs
