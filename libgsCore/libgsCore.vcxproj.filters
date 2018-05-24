@@ -26,6 +26,9 @@
     <Filter Include="src\system">
       <UniqueIdentifier>{1e1c4101-7bd7-4f24-8ab0-9406e8f3cf42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\common">
+      <UniqueIdentifier>{eed973ee-d982-494c-8c3c-2a961145f471}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\stdafx.h">
@@ -54,17 +57,17 @@
     <ClCompile Include="src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\common\logging.cpp">
-      <Filter>src\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="src\common\uuid.cpp">
-      <Filter>src\Common</Filter>
-    </ClCompile>
     <ClCompile Include="src\redis\redis_connection.cpp">
       <Filter>src\Redis</Filter>
     </ClCompile>
     <ClCompile Include="src\system\thread_pool.cpp">
       <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\uuid.cpp">
+      <Filter>src\common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\common\logging.cpp">
+      <Filter>src\common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,9 +5,9 @@
 
 int main()
 {
-  libgs::Redis::RedisConnection redisconnection;
+  libgs::redis::RedisConnection redisconnection;
 
-  redisconnection.Connect("192.168.68.132", 6379);
+  //redisconnection.Connect("192.168.68.132", 6379);
 
   while (1) {  }
 

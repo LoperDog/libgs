@@ -10,10 +10,10 @@ namespace libgs {
 class Logger {
  public:
   enum class Serverity {
-    CRITICAL,
-    ERROR,
-    INFO,
-    WARN
+    kCritical,
+    kError,
+    kInfo,
+    kWarn
   };
 
   // TODO: append syslog

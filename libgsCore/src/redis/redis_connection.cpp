@@ -1,6 +1,6 @@
-#include "redis/redis_connection.h"
-
 #include "stdafx.h"
+
+#include "redis/redis_connection.h"
 
 #include <functional>
 #include <thread>
@@ -66,12 +66,16 @@ void RedisConnection::Connect(const std::string& address,
 void InitializeRedisIoService() {
   the_io_service = std::make_shared<boost::asio::io_service>();
 
+  // NOTE(jongtae) : windows에서 정적변수 캡쳐가 되지 않아서
+  // 임시로 io_service에 담는다
+  std::shared_ptr<boost::asio::io_service> io_service = the_io_service;
+
   // TODO(inkeun): 쓰레드 종료 과정을 추가로 확인하도록 만든다.
-  auto run_function = [the_io_service]() {
+  auto run_function = [io_service]() {
     std::shared_ptr<boost::asio::io_service::work> work =
         std::make_shared<boost::asio::io_service::work>(
-            *the_io_service);
-    the_io_service->run();
+            *io_service);
+    io_service->run();
   };
 
   the_thread = std::make_shared<std::thread>(run_function);
