@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "common/logging.h"
 
 #include "stdafx.h"
@@ -134,19 +136,19 @@ void Logger::Impl::Warn(const std::stringstream &msg) {
 
 void Logger::Impl::Log(const Serverity &severity, const std::string &msg) {
   switch (severity) {
-    case Serverity::CRITICAL:
+    case Serverity::kCritical:
     Critical(msg);
     return;
 
-    case Serverity::ERROR:
+    case Serverity::kError:
     Error(msg);
     return;
 
-    case Serverity::INFO:
+    case Serverity::kInfo:
     Info(msg);
     return;
 
-    case Serverity::WARN:
+    case Serverity::kWarn:
     Warn(msg);
     return;
   }
@@ -168,7 +170,7 @@ const std::string &Logger::Impl::filename() const {
 // LOGGER
 
 Logger::Logger(const std::string &name) {
-  BOOST_ASSERT(not impl_);
+  BOOST_ASSERT(!impl_);
   impl_ = std::make_unique<Logger::Impl>();
   impl_->Create(name);
 }
@@ -176,7 +178,7 @@ Logger::Logger(const std::string &name) {
 
 Logger::Logger(const std::string &name, const std::string &filename,
                const TimeProperty &property) {
-  BOOST_ASSERT(not impl_);
+  BOOST_ASSERT(!impl_);
   impl_ = std::make_unique<Logger::Impl>();
   impl_->Create(name, filename, property);
 }
@@ -185,7 +187,7 @@ Logger::Logger(const std::string &name, const std::string &filename,
 Logger::Logger(const std::string &name, const std::string &filename,
                const size_t max_size_in_mb,
                const size_t max_rotation_count) {
-  BOOST_ASSERT(not impl_);
+  BOOST_ASSERT(!impl_);
   impl_ = std::make_unique<Logger::Impl>();
   impl_->Create(name);
 }

@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "common/uuid.h"
 
 #include "stdafx.h"

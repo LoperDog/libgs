@@ -1,6 +1,6 @@
-#include "system/thread_pool.h"
-
 #include "stdafx.h"
+
+#include "system/thread_pool.h"
 
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/strand.hpp>
