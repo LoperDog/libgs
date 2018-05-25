@@ -52,6 +52,9 @@
     <ClInclude Include="include\system\thread_pool.h">
       <Filter>include\System</Filter>
     </ClInclude>
+    <ClInclude Include="include\grouping\grouping.h" />
+    <ClInclude Include="include\common\error.h" />
+    <ClInclude Include="include\common\peer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -75,5 +78,7 @@
     <ClCompile Include="src\common\logging.cpp">
       <Filter>src\common</Filter>
     </ClCompile>
+    <ClCompile Include="src\common\peer.cpp" />
+    <ClCompile Include="src\grouping\grouping.cpp" />
   </ItemGroup>
 </Project>
