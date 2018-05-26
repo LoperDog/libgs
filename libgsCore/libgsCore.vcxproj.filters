@@ -52,6 +52,10 @@
     <ClInclude Include="include\system\thread_pool.h">
       <Filter>include\System</Filter>
     </ClInclude>
+    <ClInclude Include="include\network\asio_server.h" />
+    <ClInclude Include="include\network\common.h" />
+    <ClInclude Include="include\network\Server.h" />
+    <ClInclude Include="include\network\USession.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -69,5 +73,8 @@
     <ClCompile Include="src\common\logging.cpp">
       <Filter>src\common</Filter>
     </ClCompile>
+    <ClCompile Include="src\network\asio_server.cpp" />
+    <ClCompile Include="src\network\Server.cpp" />
+    <ClCompile Include="src\network\USession.cpp" />
   </ItemGroup>
 </Project>

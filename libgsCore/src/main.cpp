@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <iostream>
 #include "redis/redis_connection.h"
 #include "redis/redis_parameter.h"
@@ -20,7 +21,7 @@ int main() {
 
   while (1) {
     std::cout << "wait.." << std::endl;
-    sleep(1);
+    Sleep(1);
   }
   return 0;
 }

@@ -15,7 +15,7 @@ class Uuid {
   static Uuid Generate();
 
   static boost::uuids::uuid kNilUuid;
-
+  Uuid() {}
   Uuid(const boost::uuids::uuid &uuid);
 
   const bool IsNil() const;
