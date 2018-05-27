@@ -19,18 +19,6 @@ int main() {
 
   testServer->Start();
 
-
-  std::thread th([]() {
-    Sleep(30);
-    boost::shared_ptr<app::TCPClient> client =
-      boost::make_shared<app::TCPClient>();
-    client->Connect(SERVER_IP, SERVER_PORT);
-
-    while (true) {
-    }
-  });
-
-
   app::InitializeAsio();
 
   while (true) {

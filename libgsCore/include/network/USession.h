@@ -17,12 +17,10 @@ namespace app {
   class USession
   {
   public:
-    //USession(const std::shared_ptr<TCPSocket>& socket) : socket_(socket) {}
     USession(boost::asio::io_service& socket) : socket_(socket) {	}
 
     TCPSocket& Socket() { return socket_; }
 
-    //void InputData(boost::shared_ptr<app::Data> data) {
     void InputData(boost::shared_ptr<std::string> data) {
       snedBuffer_.push(data);
     }
@@ -32,8 +30,6 @@ namespace app {
   private:
     TCPSocket socket_;
     std::queue <boost::shared_ptr<std::string>> snedBuffer_;
-    //std::queue <boost::shared_ptr<app::Data>> snedBuffer_;
-    //app::Data buffer_;
   };
 }
 

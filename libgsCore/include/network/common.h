@@ -1,4 +1,4 @@
-
+﻿
 #ifndef COMMON_COMMON_H
 #define COMMON_COMMON_H
 
@@ -37,7 +37,8 @@ namespace app {
   };
 
   struct Data : public Packet {
-    std::array<char, 256> body;
+    int bodySize;
+    char data[256];
   };
 }
 #endif
