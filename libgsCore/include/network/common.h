@@ -37,8 +37,12 @@ namespace app {
   };
 
   struct Data : public Packet {
+    Data() {}
+    Data(Data &_data) : Packet(_data.size,_data.header),
+    bodySize(_data.bodySize), data(_data.data) {}
+
     int bodySize;
-    char data[256];
+    char* data;
   };
 }
 #endif
