@@ -53,20 +53,28 @@ namespace app {
     void RecvHandling();
     void SendHandling();
 
+    void PassData(Data _data);
+
     void Close();
 
   private : 
     void OnRecv(const boost::system::error_code& error, const size_t si);
     void OnSend(const boost::system::error_code & error);
 
-    //void testSend();
+    void TestMethod(char* buffer, int len);
 
     TCPSocket socket_;
 
     boost::mutex mutex_;
 
+    boost::shared_ptr<Data> dataBuffer_;
+    Data* dataBuffer_t = nullptr;
+    char* buffer;
+    int stack = 0;
     Buffer buffer_;
     Data TestData;
+    char localBuffer_[1024];
+    int length = 0;
   };
 
   void InitializeAsio();

@@ -13,6 +13,10 @@
   <ItemGroup>
     <ClInclude Include="include\common\logging.h" />
     <ClInclude Include="include\common\uuid.h" />
+    <ClInclude Include="include\network\asio_server.h" />
+    <ClInclude Include="include\network\common.h" />
+    <ClInclude Include="include\network\Server.h" />
+    <ClInclude Include="include\network\USession.h" />
     <ClInclude Include="include\redis\redis_connection.h" />
     <ClInclude Include="include\redis\redis_parameter.h" />
     <ClInclude Include="include\system\thread_pool.h" />
@@ -22,6 +26,9 @@
   <ItemGroup>
     <ClCompile Include="src\common\logging.cpp" />
     <ClCompile Include="src\common\uuid.cpp" />
+    <ClCompile Include="src\network\asio_server.cpp" />
+    <ClCompile Include="src\network\Server.cpp" />
+    <ClCompile Include="src\network\USession.cpp" />
     <ClCompile Include="src\redis\redis_connection.cpp" />
     <ClCompile Include="src\system\thread_pool.cpp" />
     <ClCompile Include="src\stdafx.cpp">
