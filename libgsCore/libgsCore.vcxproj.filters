@@ -56,6 +56,7 @@
     <ClInclude Include="include\network\common.h" />
     <ClInclude Include="include\network\Server.h" />
     <ClInclude Include="include\network\USession.h" />
+    <ClInclude Include="include\network\networkmethod.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">

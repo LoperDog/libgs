@@ -22,6 +22,6 @@ int main() {
   app::InitializeAsio();
 
   while (true) {
-
+    Sleep(30);
   }
 }

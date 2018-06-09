@@ -28,6 +28,7 @@ using TCPEndPoint = boost::asio::ip::tcp::endpoint;
 typedef std::array<char, 256> Buffer;
 
 namespace app {
+
   struct Packet {
 		Packet() {}
     Packet(const size_t _size, const int64_t _header):
@@ -37,12 +38,9 @@ namespace app {
   };
 
   struct Data : public Packet {
-    Data() {}
-    Data(Data &_data) : Packet(_data.size,_data.header),
-    bodySize(_data.bodySize), data(_data.data) {}
-
     int bodySize;
-    char* data;
+    //char data[256];
+    char * data;
   };
 }
 #endif

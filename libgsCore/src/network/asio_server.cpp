@@ -24,15 +24,29 @@ const app::TCPServer::TestFunction app::TCPServer::kNullCallBack = NullCallBack;
 
 void app::TCPServer::ChatEvent(boost::shared_ptr<Data> Buffer) {
   BOOST_ASSERT(Buffer);
-  std::cout << "TestChat in Server : " << Buffer->size << std::endl;
+  std::cout << "TestChat in Server : " << Buffer->data << std::endl;
 
+  for (auto item : userlist) {
+    item.second.get()->SendHandling(Buffer);
+  }
+}
 
+// NOTE[loperdog] : 이벤트를 매핑한다.이는 서버 클래스에서 동작하며
+// 메소드와 생성된 클래스 위치를 넘긴다.
+int app::TCPServer::InsertRecvEvent(int64_t header, EventMethod ev, NetworkMethod fromclass) {
+  BOOST_ASSERT(fromclass.GetThis());
+  
+  eventList.insert(std::make_pair(header,
+    boost::bind(ev,_1,_2)));
+
+  return 0;
 }
 
 void app::TCPServer::Start() {
   TCPEndPoint ep(boost::asio::ip::tcp::v4(), property_.port);
   acceptor_ = boost::make_shared<TCPAsyncAcceptor>(
-    ioservice,ep,this);
+    //ioservice,ep,this);
+    ioservice,ep);
 
   BOOST_ASSERT(acceptor_);
 
@@ -62,11 +76,8 @@ void app::TCPServer::OnAccepted(boost::shared_ptr<TCPClient> client,
   BOOST_ASSERT(newuuid);
   
   userlist.insert(std::make_pair(newuuid, client));
-
-  //NOTE[loperdog] : client set Recv
-  //typedef boost::function<void(const boost::shared_ptr<Buffer> &buffer)> ReceiveCb;
-  //ReceiveCb recv = bind(&TCPServer::ChatEvent,
-  //  shared_from_this(), _1);
+  // NOTE[loperdog] : 클라이언트에 자신의 uuid를 넣어둔다.
+  client->SetUuid(newuuid);
 
   client->RecvHandling(boost::bind(
     &TCPServer::ChatEvent,shared_from_this(),_1));
@@ -75,15 +86,26 @@ void app::TCPServer::OnAccepted(boost::shared_ptr<TCPClient> client,
 app::TCPClient::TCPClient() : socket_(CreateTCPSocket()) {}
 
 void app::TCPClient::OnSend(const boost::system::error_code & error) {
-
+  std::cout << "Doing Sending" << std::endl;
 }
 
-void app::TCPClient::SendHandling() {
+void app::TCPClient::SendHandling(boost::shared_ptr<Data> data) {
+  BOOST_ASSERT(data);
+  
+  std::cout << data.get()->data << std::endl;
+
+  socket_.async_write_some(
+    boost::asio::buffer(data.get(),data->size),
+    boost::bind(&TCPClient::OnSend,shared_from_this(),
+      boost::asio::placeholders::error));
 
 }
 
 void app::TCPClient::OnRecv(const boost::system::error_code& error,
   const size_t si, const Callback cb) {
+
+  boost::shared_ptr<char> test = boost::make_shared<char>(256);
+  std::cout << strlen(test.get()) << std::endl;
 
   //Packet testPacket;
   //Wonchae : 임시 리시브 코드
