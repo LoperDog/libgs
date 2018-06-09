@@ -30,17 +30,17 @@ typedef std::array<char, 256> Buffer;
 namespace app {
 
   struct Packet {
-		Packet() {}
-    Packet(const size_t _size, const int64_t _header):
-      size(_size), header(_header){}
+    Packet() {}
+    Packet(const size_t _size, const int64_t _header) :
+      size(_size), header(_header) {}
     size_t size;
     int64_t header;
   };
 
   struct Data : public Packet {
+    Data() { memset(data, '\0', sizeof(data)); }
     int bodySize;
-    //char data[256];
-    char * data;
+    char data[1024];
   };
 }
 #endif

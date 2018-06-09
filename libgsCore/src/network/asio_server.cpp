@@ -104,46 +104,78 @@ void app::TCPClient::SendHandling(boost::shared_ptr<Data> data) {
 void app::TCPClient::OnRecv(const boost::system::error_code& error,
   const size_t si, const Callback cb) {
 
-  boost::shared_ptr<char> test = boost::make_shared<char>(256);
-  std::cout << strlen(test.get()) << std::endl;
-
-  //Packet testPacket;
-  //Wonchae : 임시 리시브 코드
-  memcpy(&TestData, buffer_.data(), sizeof(Buffer));
-  std::cout << "Client Server memcpy headersize : " << TestData.header << std::endl;
-  std::cout << "Client Server memcpy size : " << TestData.size << std::endl;
+  static int cnt = 0;
+  {
+    boost::lock_guard<boost::mutex> guard(mutex_);
+    std::cout << "cnt : " << ++cnt << std::endl;
+  }
 
   if (si == 0) {
     Close();
     std::cout << "Client disconnect" << std::endl;
-    return ;
+    return;
   }
+  else {
+    puts("-------------------------------------------------");
 
-  std::cout << "size : " << sizeof(Buffer) << std::endl;
+    size_t size = 0;
+    int isize = sizeof(size);
 
-  size_t size = sizeof(Packet) + sizeof(TestData.bodySize);
-  size_t addSize = TestData.size - size;
-  {
-    boost::lock_guard<boost::mutex> guard(mutex_);
+    char* lo_buffer = nullptr;
+    {
 
-    char* msgbuf = new char[TestData.bodySize]{'\0',};
+      boost::lock_guard<boost::mutex> guard(mutex_);
 
-    std::cout << "new data size : " << TestData.bodySize << std::endl;
-    memcpy(msgbuf, buffer_.data() + size, addSize);
+      if (length != 0) {
+        lo_buffer = new char[length];
 
-    std::cout << "msgbuf size : " << std::strlen(msgbuf) << std::endl;
-    std::cout << "Server memcpy body : " << msgbuf << std::endl;
+        memcpy(lo_buffer, buffer, length);
+        delete[]buffer;
+      }
 
-    delete []msgbuf;
+      buffer = new char[si + length];
+
+      if (lo_buffer != nullptr)
+      {
+        memcpy(buffer, lo_buffer, length);
+
+        delete[]lo_buffer;
+      }
+      memcpy(buffer + length, buffer_.data(), si);
+    }
+
+    while (isize + stack < si + length)
+    {
+      std::cout << "stack : " << stack << std::endl;
+
+      memcpy(&size, buffer + stack, isize);
+      std::cout << "size : " << size << std::endl;
+
+      stack += size;
+    }
+
+    if (stack == si + length) {
+      boost::lock_guard<boost::mutex> guard(mutex_);
+      TestMethod(buffer, stack);
+      length = 0;
+      stack = 0;
+    }
+    else{
+      length += si;
+    }
 
   }
-  boost::shared_ptr<Data> toServerData =
-    boost::make_shared<Data>(TestData);
-
-  cb(toServerData);
-
-
   RecvHandling(cb);
+
+    // TODO[loperdog] : 서버의 온리시브를 실행한다.
+}
+
+void app::TCPClient::TestMethod(char* buffer, int len) {
+  static int length;
+  length += len;
+  std::cout << "length : " << length << std::endl;
+  static int cnt;
+  std::cout << ++cnt << std::endl;
 }
 
 void app::TCPClient::RecvHandling(const Callback cb) {
