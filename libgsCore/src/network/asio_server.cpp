@@ -20,7 +20,17 @@ namespace app {
   }
 }
 // 임시로 만든다.
-const app::TCPServer::TestFunction app::TCPServer::kNullCallBack = NullCallBack;
+const app::TCPServer::OnRecvCallBack app::TCPServer::kNullCallBack = NullCallBack;
+
+void app::TCPServer::ClientOnRecv(const boost::shared_ptr<libgs::Uuid> uuid_,
+  int64_t header_,  const boost::shared_ptr<char> buffer_){
+
+  // TODO[loperdog -> wonchae] : 이곳이 클라이언트에서 콜백을 시키는 곳.
+
+
+  // NOTE[loperdog] : 이벤트로 들어온 콜백을 실행시킴
+  eventList.find(header_)->second(uuid_, buffer_.get());
+}
 
 void app::TCPServer::ChatEvent(boost::shared_ptr<Data> Buffer) {
   BOOST_ASSERT(Buffer);
@@ -36,6 +46,7 @@ void app::TCPServer::ChatEvent(boost::shared_ptr<Data> Buffer) {
 int app::TCPServer::InsertRecvEvent(int64_t header, EventMethod ev, NetworkMethod fromclass) {
   BOOST_ASSERT(fromclass.GetThis());
   
+  // NOTE[loperdog] : 현재는 메소드만 넘겨 저장한다.
   eventList.insert(std::make_pair(header,
     boost::bind(ev,_1,_2)));
 
@@ -45,7 +56,6 @@ int app::TCPServer::InsertRecvEvent(int64_t header, EventMethod ev, NetworkMetho
 void app::TCPServer::Start() {
   TCPEndPoint ep(boost::asio::ip::tcp::v4(), property_.port);
   acceptor_ = boost::make_shared<TCPAsyncAcceptor>(
-    //ioservice,ep,this);
     ioservice,ep);
 
   BOOST_ASSERT(acceptor_);
@@ -80,7 +90,7 @@ void app::TCPServer::OnAccepted(boost::shared_ptr<TCPClient> client,
   client->SetUuid(newuuid);
 
   client->RecvHandling(boost::bind(
-    &TCPServer::ChatEvent,shared_from_this(),_1));
+    &TCPServer::ClientOnRecv,shared_from_this(),_1,_2,_3));
 }
 // NOTE[loperdog] : 소켓은 전역으로 선언된 IOservice에 연결한 뒤 생성된 소켓을 반환한다. 
 app::TCPClient::TCPClient() : socket_(CreateTCPSocket()) {}
@@ -102,7 +112,7 @@ void app::TCPClient::SendHandling(boost::shared_ptr<Data> data) {
 }
 
 void app::TCPClient::OnRecv(const boost::system::error_code& error,
-  const size_t si, const Callback cb) {
+  const size_t si, const OnRecvCallBack cb) {
 
   static int cnt = 0;
   {
@@ -157,6 +167,8 @@ void app::TCPClient::OnRecv(const boost::system::error_code& error,
     if (stack == si + length) {
       boost::lock_guard<boost::mutex> guard(mutex_);
       TestMethod(buffer, stack);
+      //TODO[loperdog] : 콜백임시 테스트중 코드 수정바람.
+      cb(GetUuid(),1,buffer);
       length = 0;
       stack = 0;
     }
@@ -178,7 +190,7 @@ void app::TCPClient::TestMethod(char* buffer, int len) {
   std::cout << ++cnt << std::endl;
 }
 
-void app::TCPClient::RecvHandling(const Callback cb) {
+void app::TCPClient::RecvHandling(const OnRecvCallBack cb) {
   std::cout << "Server : Start recv" << std::endl;
   memset(&buffer_, '\0', sizeof(buffer_));
   BOOST_ASSERT(cb);

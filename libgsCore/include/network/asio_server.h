@@ -11,7 +11,6 @@
 #include <boost/asio/buffer.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 
-#include <functional>
 
 namespace app {
   class TCPClient;
@@ -23,7 +22,8 @@ namespace app {
       const boost::shared_ptr<Data> &buffer)> Callback;
 
     typedef boost::function<void(
-      const boost::shared_ptr<Data> &Buffer)> TestFunction;
+      const boost::shared_ptr<libgs::Uuid> uuid_,int64_t header_, 
+      const boost::shared_ptr<char> &buffer_)> OnRecvCallBack;
 
     // NOTE[loperdog] : recv event형식
     typedef boost::function<void(boost::shared_ptr<libgs::Uuid>, char *)> EventMethod;
@@ -38,6 +38,10 @@ namespace app {
       const boost::shared_ptr<libgs::Uuid> uuid) {
       return userlist.find(uuid)->second; 
     }
+
+    // NOTE[loperdog] : 클라이언트 리시브 이벤트에서 받을 함수
+    void ClientOnRecv(const boost::shared_ptr<libgs::Uuid> uuid_,
+      int64_t header_, const boost::shared_ptr<char> buffer_);
 
     // NOTE[loperdog] : 임시 테스트용 이벤트
     void ChatEvent(const boost::shared_ptr<Data> Buffer);
@@ -59,7 +63,7 @@ namespace app {
     std::map<int64_t, EventMethod> eventList;
 
     // NOTE[loperdog] : 임시로 사용한다.
-    static const TestFunction kNullCallBack;
+    static const OnRecvCallBack kNullCallBack;
     Packet RecvPacket;
     Data RecvData;
     Data test;
@@ -71,21 +75,23 @@ namespace app {
     typedef boost::function<void(
       const boost::shared_ptr<Data> &buffer)> Callback;
 
+    typedef boost::function<void(
+      const boost::shared_ptr<libgs::Uuid> uuid_, int64_t header_,
+      const boost::shared_ptr<char> &buffer_)> OnRecvCallBack;
+
     //NOTE[loperdog] : 테스트용 펑션
     typedef boost::function<void(const boost::shared_ptr<Data> &Buffer)> TestFunction;
 
     TCPClient();
     TCPSocket& Socket() { return socket_; }
 
-    void RecvHandling(const Callback cb);
+    void RecvHandling(const OnRecvCallBack cb);
     void SendHandling(boost::shared_ptr<Data> data);
 
     void PassData(Data _data);
 
     void Close();
 
-    int returnTest() { return 145; }
-    
     // NOTE [loperdog] : 클라이언트가 자신임을 알수 있도록
     void SetUuid(const boost::shared_ptr<libgs::Uuid> id) { MyUuid = id; }
     const boost::shared_ptr<libgs::Uuid> GetUuid() { return MyUuid; }

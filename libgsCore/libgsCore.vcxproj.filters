@@ -56,7 +56,7 @@
     <ClInclude Include="include\network\common.h" />
     <ClInclude Include="include\network\Server.h" />
     <ClInclude Include="include\network\USession.h" />
-    <ClInclude Include="include\network\networkmethod.h" />
+    <ClInclude Include="include\network\rest.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -77,5 +77,6 @@
     <ClCompile Include="src\network\asio_server.cpp" />
     <ClCompile Include="src\network\Server.cpp" />
     <ClCompile Include="src\network\USession.cpp" />
+    <ClCompile Include="src\network\rest.pb.cc" />
   </ItemGroup>
 </Project>
