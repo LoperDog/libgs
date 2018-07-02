@@ -42,5 +42,22 @@ namespace app {
     int bodySize;
     char data[1024];
   };
+
+  enum MethodHeader {
+    kLogin,
+    kRoomList,
+    kRoomMake,
+    kRoomJoin,
+    kChat,
+    kTestHeader,
+    kTestSend
+  };
+
+  enum SendType {
+    Non,
+    Self,
+    All,
+    Group,
+  };
 }
 #endif
