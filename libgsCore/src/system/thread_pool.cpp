@@ -210,7 +210,7 @@ void ThreadPool::Create(const std::string &name,
 
   BOOST_ASSERT(result.second);
   if (!result.second) {
-    cb(false);
+    cb(nullptr);
     return;
   }
 
